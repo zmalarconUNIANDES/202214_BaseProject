@@ -30,6 +30,7 @@ describe('StoreService', () => {
       const store: Store = await repositoryStore.save({
         name: faker.company.name(),
         location: faker.datatype.string(3),
+        address: faker.address.direction(),
       });
       storeList.push(store);
     }
@@ -51,6 +52,7 @@ describe('StoreService', () => {
     expect(store).not.toBeNull();
     expect(store.name).toEqual(mockStore.name);
     expect(store.location).toEqual(mockStore.location);
+    expect(store.address).toEqual(mockStore.address);
   });
 
   it('findOne should throw an exception for an invalid store', async () => {
@@ -65,6 +67,7 @@ describe('StoreService', () => {
       id: '',
       name: 'My store joker',
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
       products: [],
     };
 
@@ -77,6 +80,7 @@ describe('StoreService', () => {
     expect(mockStore).not.toBeNull();
     expect(mockStore.name).toEqual(newStore.name);
     expect(mockStore.location).toEqual(newStore.location);
+    expect(mockStore.address).toEqual(newStore.address);
   });
 
   it('create should return a location store is invalid', async () => {
@@ -84,6 +88,7 @@ describe('StoreService', () => {
       id: '',
       name: faker.company.name(),
       location: faker.datatype.string(4),
+      address: faker.address.direction(),
       products: [],
     };
 
@@ -97,6 +102,7 @@ describe('StoreService', () => {
     const store: Store = storeList[0];
     store.name = 'New product';
     store.location = 'BOG';
+    store.address = 'Cll 134 59A 81';
     const updatedStore: StoreDTO = await service.update(store.id, store);
     expect(updatedStore).not.toBeNull();
     const mockStore: Store = await repositoryStore.findOne({
@@ -105,6 +111,22 @@ describe('StoreService', () => {
     expect(mockStore).not.toBeNull();
     expect(mockStore.name).toEqual(store.name);
     expect(mockStore.location).toEqual(store.location);
+    expect(mockStore.address).toEqual(store.address);
+  });
+
+  it('update should return a location store is invalid', async () => {
+    let store: Store = storeList[0];
+    store = {
+      ...store,
+      name: faker.company.name(),
+      location: faker.datatype.string(4),
+      address: faker.address.direction(),
+    };
+
+    await expect(() => service.update(store.id, store)).rejects.toHaveProperty(
+      'message',
+      'The location store is invalid',
+    );
   });
 
   it('update should throw an exception for an invalid store', async () => {
@@ -113,6 +135,7 @@ describe('StoreService', () => {
       ...store,
       name: 'New product',
       location: 'MED',
+      address: 'Cll 134 59A 81',
     };
     await expect(() => service.update('0', store)).rejects.toHaveProperty(
       'message',

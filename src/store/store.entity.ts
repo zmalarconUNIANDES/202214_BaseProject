@@ -18,6 +18,9 @@ export class Store {
   @Column()
   location: string;
 
+  @Column()
+  address: string;
+
   @ManyToMany(() => Product, (product) => product.stores)
   @JoinTable()
   products: Product[];

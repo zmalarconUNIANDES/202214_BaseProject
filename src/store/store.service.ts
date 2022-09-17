@@ -41,6 +41,7 @@ export class StoreService {
       );
     store.name = storeDTO.name;
     store.location = storeDTO.location;
+    store.address = storeDTO.address;
     return await this.storeRepository.save(store);
   }
 
@@ -51,9 +52,15 @@ export class StoreService {
         'The store with the given id was not found',
         BusinessError.NOT_FOUND,
       );
+    if (storeDTO.location.length < 3 || storeDTO.location.length > 3)
+      throw new BusinessLogicException(
+        'The location store is invalid',
+        BusinessError.BAD_REQUEST,
+      );
 
     store.name = storeDTO.name;
     store.location = storeDTO.location;
+    store.address = storeDTO.address;
     await this.storeRepository.save(store);
     return store;
   }

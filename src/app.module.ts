@@ -21,7 +21,7 @@ import { StoreProductModule } from './store-product/store-product.module';
       password: 'admin',
       database: 'partial',
       entities: [Store, Product],
-      dropSchema: false,
+      dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
     }),

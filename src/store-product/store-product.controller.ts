@@ -21,7 +21,7 @@ import { StoreProductService } from './store-product.service';
 export class StoreProductController {
   constructor(private readonly storeProductService: StoreProductService) {}
 
-  @Post(':productId/stores/storeId')
+  @Post(':productId/stores/:storeId')
   @HttpCode(201)
   async addStoreToProduct(
     @Param('productId') productId: string,
@@ -35,7 +35,7 @@ export class StoreProductController {
     return await this.storeProductService.findStoresFromProduct(productId);
   }
 
-  @Get(':productId/recipes/:recipeId')
+  @Get(':productId/stores/:storeId')
   async findOneStoreByProduct(
     @Param('productId') productId: string,
     @Param('storeId') storeId: string,

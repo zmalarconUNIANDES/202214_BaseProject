@@ -87,6 +87,21 @@ describe('ProductService', () => {
     expect(mockProduct.type).toEqual(newProduct.type);
   });
 
+  it('create should return error bad request for a new product', async () => {
+    const product: Product = {
+      id: '',
+      name: faker.company.name(),
+      price: faker.datatype.number(),
+      type: null,
+      stores: [],
+    };
+
+    await expect(() => service.create(product)).rejects.toHaveProperty(
+      'message',
+      'The type product is invalid. Please use PERECEDERO or NO_PERECEDERO value',
+    );
+  });
+
   it('update should modify a product', async () => {
     const product: Product = productsList[0];
     product.name = 'New product';
@@ -117,6 +132,23 @@ describe('ProductService', () => {
     await expect(() => service.update('0', product)).rejects.toHaveProperty(
       'message',
       'The product with the given id was not found',
+    );
+  });
+
+  it('update should return error bad request for a product', async () => {
+    let product: Product = productsList[0];
+    product = {
+      ...product,
+      name: 'New product',
+      price: 500,
+      type: null,
+    };
+
+    await expect(() =>
+      service.update(product.id, product),
+    ).rejects.toHaveProperty(
+      'message',
+      'The type product is invalid. Please use PERECEDERO or NO_PERECEDERO value',
     );
   });
 

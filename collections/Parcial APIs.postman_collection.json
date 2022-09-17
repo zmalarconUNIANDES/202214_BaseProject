@@ -1,0 +1,1193 @@
+{
+	"info": {
+		"_postman_id": "6931ddea-a2d8-4404-af73-70defcf4c101",
+		"name": "Parcial APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "260565"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Valid",
+					"item": [
+						{
+							"name": "New Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function() {",
+											"    pm.response.to.have.status(201);",
+											"    ",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"product_id\", jsonData.id);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Queso Azul\",\n   \"price\": 150,\n   \"type\": \"NO_PERECEDERO\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Products",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/products",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get A Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Sauce Chili\",\n   \"price\": 125,\n   \"type\": \"NO_PERECEDERO\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function() {",
+											"    pm.response.to.have.status(204);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Invalid",
+					"item": [
+						{
+							"name": "New Product Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function() {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Sauce Chili\",\n   \"price\": 150,\n   \"type\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "A Product Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update A Product Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Sauce Chili\",\n   \"price\": 125,\n   \"type\": \"NO_PERECEDERO\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update A Product Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function() {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Sauce Chili\",\n   \"price\": \"125\",\n   \"type\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a Product Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Valid",
+					"item": [
+						{
+							"name": "New Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function() {",
+											"    pm.response.to.have.status(201);",
+											"    ",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"store_id\", jsonData.id);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Asaro II\",\n   \"location\": \"MED\",\n   \"address\": \"Kra 59B Calle 133\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/stores",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Stores",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/stores",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get A Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update A Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Yummy\",\n   \"location\": \"BOG\",\n   \"address\": \"Calle 170 Av Boyaca\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete A Store",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function() {",
+											"    pm.response.to.have.status(204);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Invalid",
+					"item": [
+						{
+							"name": "New Store Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function() {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Jumbo\",\n   \"location\": \"BOGOTA\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/stores",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "A Store Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update A Store Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Jumbo\",\n   \"location\": \"MEDELLIN\",\n   \"address\": \"Calle 80 Kra 75\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update A Store Error Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Jumbo\",\n   \"location\": \"MED\",\n   \"address\": \"Calle 80 Kra 75\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete A Store Not Found",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Store-Product",
+			"item": [
+				{
+					"name": "Valid",
+					"item": [
+						{
+							"name": "Add Store From Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function() {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}",
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Stores From Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}/stores",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}",
+										"stores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get A Store From Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}",
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Stores From Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function() {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"id\": \"cd13887c-c26a-4503-98df-aa35e9a98f2f\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}/stores",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}",
+										"stores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Store From Product",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function() {",
+											"    pm.response.to.have.status(204);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}",
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Invalid",
+					"item": [
+						{
+							"name": "Add Store From Product NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}",
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Store From Product NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}",
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Stores From Product Error",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 400\", function() {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"id\": \"cd13887c-c26a-4503-98df-aa35e9a98f2f\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}/stores",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}",
+										"stores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete A Store From Product NotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function() {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/products/{{product_id}}/stores/{{store_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"products",
+										"{{product_id}}",
+										"stores",
+										"{{store_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "product_id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "store_id",
+			"value": "1"
+		}
+	]
+}

@@ -46,6 +46,7 @@ describe('StoreProductController', () => {
       id: faker.random.alphaNumeric(),
       name: faker.company.name(),
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
     };
     controller.updateStoresByProduct('1', [mockStore]);
     expect(spyService.updateStoresFromProduct).toHaveBeenCalled();

@@ -40,6 +40,7 @@ describe('StoreController', () => {
       id: faker.random.alphaNumeric(),
       name: faker.company.name(),
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
       products: [],
     };
     controller.createStore(mockStore);
@@ -52,6 +53,7 @@ describe('StoreController', () => {
       id: faker.random.alphaNumeric(),
       name: faker.company.name(),
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
       products: [],
     };
     controller.updateStore(storeId, mockStore);

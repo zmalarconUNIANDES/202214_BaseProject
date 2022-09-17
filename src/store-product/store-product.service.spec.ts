@@ -39,6 +39,7 @@ describe('StoreProductService', () => {
       const store = new Store();
       store.name = faker.company.name();
       store.location = faker.datatype.string(3);
+      store.address = faker.address.direction();
       await storeRepository.save(store);
       storeList.push(store);
     }
@@ -59,6 +60,7 @@ describe('StoreProductService', () => {
     const newStore: Store = await storeRepository.save({
       name: faker.company.name(),
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
     });
 
     const newProduct: Product = await productRepository.save({
@@ -97,6 +99,7 @@ describe('StoreProductService', () => {
     const newStore: Store = await storeRepository.save({
       name: faker.company.name(),
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
     });
 
     await expect(() =>
@@ -130,6 +133,7 @@ describe('StoreProductService', () => {
     expect(mockStore).not.toBeNull();
     expect(mockStore.name).toBe(store.name);
     expect(mockStore.location).toBe(store.location);
+    expect(mockStore.address).toBe(store.address);
   });
 
   it('findStoreFromProduct should throw an exception for an invalid store', async () => {
@@ -155,6 +159,7 @@ describe('StoreProductService', () => {
     const newStore: Store = await storeRepository.save({
       name: faker.company.name(),
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
     });
 
     await expect(() =>
@@ -169,6 +174,7 @@ describe('StoreProductService', () => {
     const newStore: Store = await storeRepository.save({
       name: faker.company.name(),
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
     });
 
     const updateProduct: Product = await service.updateStoresFromProduct(
@@ -185,6 +191,7 @@ describe('StoreProductService', () => {
     const newStore: Store = await storeRepository.save({
       name: faker.company.name(),
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
     });
 
     await expect(() =>
@@ -246,6 +253,7 @@ describe('StoreProductService', () => {
     const newStore: Store = await storeRepository.save({
       name: faker.company.name(),
       location: faker.datatype.string(3),
+      address: faker.address.direction(),
     });
 
     await expect(() =>

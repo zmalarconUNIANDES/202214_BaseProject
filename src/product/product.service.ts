@@ -7,6 +7,7 @@ import {
 import { Repository } from 'typeorm';
 import { ProductDTO } from './product.dto';
 import { Product } from './product.entity';
+import { TypeProduct } from './product.enum';
 
 @Injectable()
 export class ProductService {
@@ -33,6 +34,13 @@ export class ProductService {
   }
 
   async create(productDTO: ProductDTO): Promise<ProductDTO> {
+    if (!(productDTO.type in TypeProduct)) {
+      console.log(productDTO.type);
+      throw new BusinessLogicException(
+        'The type product is invalid. Please use PERECEDERO or NO_PERECEDERO value',
+        BusinessError.BAD_REQUEST,
+      );
+    }
     const product = new Product();
     product.name = productDTO.name;
     product.price = productDTO.price;
@@ -48,6 +56,12 @@ export class ProductService {
         BusinessError.NOT_FOUND,
       );
 
+    if (!(productDTO.type in TypeProduct)) {
+      throw new BusinessLogicException(
+        'The type product is invalid. Please use PERECEDERO or NO_PERECEDERO value',
+        BusinessError.BAD_REQUEST,
+      );
+    }
     product.name = productDTO.name;
     product.price = productDTO.price;
     product.type = productDTO.type;
