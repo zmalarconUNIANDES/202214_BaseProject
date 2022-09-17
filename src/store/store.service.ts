@@ -34,10 +34,10 @@ export class StoreService {
 
   async create(storeDTO: StoreDTO): Promise<StoreDTO> {
     const store = new Store();
-    if (storeDTO.name.length < 3 || storeDTO.name.length > 3)
+    if (storeDTO.location.length < 3 || storeDTO.location.length > 3)
       throw new BusinessLogicException(
-        'The name store is invalid',
-        BusinessError.PRECONDITION_FAILED,
+        'The location store is invalid',
+        BusinessError.BAD_REQUEST,
       );
     store.name = storeDTO.name;
     store.location = storeDTO.location;

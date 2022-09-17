@@ -29,7 +29,7 @@ describe('StoreService', () => {
     for (let i = 0; i < 5; i++) {
       const store: Store = await repositoryStore.save({
         name: faker.company.name(),
-        location: faker.address.city(3),
+        location: faker.datatype.string(3),
       });
       storeList.push(store);
     }
@@ -63,8 +63,8 @@ describe('StoreService', () => {
   it('create should return a new store', async () => {
     const store: Store = {
       id: '',
-      name: 'BOG',
-      location: faker.address.city(),
+      name: 'My store joker',
+      location: faker.datatype.string(3),
       products: [],
     };
 
@@ -79,17 +79,17 @@ describe('StoreService', () => {
     expect(mockStore.location).toEqual(newStore.location);
   });
 
-  it('create should return a name store is invalid', async () => {
+  it('create should return a location store is invalid', async () => {
     const store: Store = {
       id: '',
       name: faker.company.name(),
-      location: faker.address.city(),
+      location: faker.datatype.string(4),
       products: [],
     };
 
     await expect(() => service.create(store)).rejects.toHaveProperty(
       'message',
-      'The name store is invalid',
+      'The location store is invalid',
     );
   });
 
